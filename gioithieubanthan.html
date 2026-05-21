@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Giới thiệu bản thân – Trần Minh Khôi</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: "Segoe UI", system-ui, sans-serif;
+      background: #0f0f11;
+      color: #e4e4e7;
+      margin: 0;
+    }
+
+    .navbar-inverse {
+      background: #18181b;
+      border-bottom: 1px solid #2e2e33;
+      border-radius: 0;
+    }
+    .navbar-inverse .navbar-brand { color: #ffffff; font-weight: 500; }
+    .navbar-inverse .navbar-nav > li > a { color: #d4d4d8; }
+    .navbar-inverse .navbar-nav > li > a:hover { color: #fff; background: transparent; }
+    .navbar-inverse .navbar-form .form-control {
+      background: #27272a; border: 1px solid #3f3f46;
+      color: #f4f4f5; border-radius: 6px 0 0 6px;
+    }
+    .navbar-inverse .navbar-form .btn {
+      background: #3f3f46; border: 1px solid #52525b;
+      color: #e4e4e7; border-radius: 0 6px 6px 0;
+    }
+    .navbar-inverse .navbar-form .btn:hover { background: #52525b; }
+
+    .container { padding-top: 24px; padding-bottom: 24px; }
+
+    .box {
+      background: #1c1c1f;
+      border: 0.5px solid #3f3f46;
+      border-radius: 10px;
+      padding: 16px;
+      margin-bottom: 14px;
+    }
+
+    .sec-title {
+      font-size: 10px; font-weight: 500; color: #a1a1aa;
+      text-transform: uppercase; letter-spacing: .07em; margin: 0 0 10px;
+    }
+
+    .avatar {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: #27272a; border: 1px solid #52525b;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; font-weight: 500; color: #e4e4e7;
+      margin: 0 auto 10px;
+    }
+
+    .profile-name { text-align: center; font-size: 15px; font-weight: 500; color: #ffffff; margin: 0 0 3px; }
+    .profile-role { text-align: center; font-size: 12px; color: #a1a1aa; margin: 0 0 10px; }
+    .badges { text-align: center; }
+
+    .badge-dark {
+      display: inline-block; font-size: 10px; padding: 3px 9px;
+      border-radius: 20px; background: #27272a; color: #d4d4d8;
+      border: 0.5px solid #52525b; margin: 2px;
+    }
+
+    .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+    .stat-box { background: #27272a; border-radius: 7px; padding: 10px 8px; text-align: center; }
+    .stat-val { display: block; font-size: 20px; font-weight: 500; color: #ffffff; }
+    .stat-lbl { display: block; font-size: 10px; color: #a1a1aa; margin-top: 1px; }
+    .stat-full { grid-column: span 2; }
+
+    .skill-item {
+      display: flex; align-items: center; gap: 8px;
+      padding: 6px 0; border-bottom: 0.5px solid #3f3f46;
+      font-size: 13px; color: #d4d4d8;
+    }
+    .skill-item:last-child { border-bottom: none; }
+    .dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+    .prog-label { display: flex; justify-content: space-between; font-size: 11px; color: #d4d4d8; margin-bottom: 4px; }
+    .prog-track { background: #27272a; border-radius: 4px; height: 5px; margin-bottom: 10px; }
+    .prog-fill { height: 5px; border-radius: 4px; }
+
+    .contact-item {
+      display: flex; align-items: center; gap: 8px;
+      padding: 6px 0; border-bottom: 0.5px solid #3f3f46;
+      font-size: 12px; color: #d4d4d8;
+    }
+    .contact-item:last-child { border-bottom: none; }
+    .contact-item i { font-size: 14px; color: #a1a1aa; }
+
+    .acc-item { background: #27272a; border-radius: 8px; margin-bottom: 6px; overflow: hidden; }
+
+    .acc-btn {
+      width: 100%; display: flex; align-items: center; gap: 8px;
+      padding: 10px 12px; background: transparent; border: none;
+      cursor: pointer; text-align: left; transition: background 0.15s;
+    }
+    .acc-btn:hover { background: #3f3f46; }
+
+    .icon-box {
+      width: 28px; height: 28px; border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; flex-shrink: 0;
+    }
+
+    .acc-label { flex: 1; font-size: 13px; font-weight: 500; color: #f4f4f5; }
+    .chev { font-size: 13px; color: #a1a1aa; transition: transform 0.25s; }
+
+    .panel {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s;
+      padding: 0 12px; font-size: 13px; line-height: 1.7;
+      color: #700ee0;
+      border-top: 0.5px solid transparent;
+    }
+    .panel ul { padding-left: 1.1rem; margin: 0; }
+    .panel li { margin-bottom: 3px; }
+    .panel.open { padding: 8px 12px 12px; border-top-color: #3f3f46; }
+
+    footer {
+      background: #18181b; border-top: 1px solid #2e2e33;
+      color: #fffdfd; padding: 14px; text-align: center; font-size: 12px;
+    }
+  </style>
+  <style>
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+}
+
+.modal-content {
+  background: white;
+  width: 400px;
+  margin: 10% auto;
+  padding: 20px;
+  border-radius: 10px;
+  position: relative;
+}
+
+.modal-content input,
+.modal-content textarea {
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px;
+}
+
+.modal-content button {
+  width: 100%;
+  padding: 10px;
+  background: green;
+  color: rgb(255, 255, 255);
+  border: none;
+}
+
+.close {
+  position: absolute;
+  right: 10px;
+  top: 5px;
+  font-size: 25px;
+  cursor: pointer;
+}
+</style>
+<style>
+.modal-content h2 {
+  color: #1D9E75; 
+  font-weight: bold; 
+}
+
+.modal-content input,
+.modal-content textarea {
+  background: #ffffff;  
+  color: #0e0e1b;       
+  border: 1px solid #3f3f46;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 14px;
+}
+.modal-content input::placeholder,
+.modal-content textarea::placeholder {
+  color: #a1a1aa;
+}
+</style>
+
+</head>
+<body>
+<script>
+function openContact() {
+  document.getElementById("contactModal").style.display = "block";
+}
+function closeContact() {
+  document.getElementById("contactModal").style.display = "none";
+}
+</script>
+</body>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#nav">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Trần Minh Khôi</a>
+    </div>
+    <div class="collapse navbar-collapse" id="nav">
+      <ul class="nav navbar-nav">
+        <li><a href="#" onclick="openContact()">Liên hệ</a></li>
+        <div id="contactModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeContact()">&times;</span>
+
+    <h2>Liên hệ với chúng tôi</h2>
+
+    <form>
+      <input type="text" placeholder="Họ và tên" required>
+      <input type="email" placeholder="Email" required>
+      <textarea placeholder="Nội dung..." rows="5" required></textarea>
+      <button type="submit">Gửi</button>
+    </form>
+  </div>
+</div>
+      </ul>
+      <form class="navbar-form navbar-right">
+        <div class="form-group input-group">
+          <input type="text" class="form-control" placeholder="Tìm kiếm...">
+          <span class="input-group-btn">
+            <button class="btn" type="button"><i class="ti ti-search"></i></button>
+          </span>
+        </div>
+      </form>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="row">
+
+    <!-- LEFT -->
+    <div class="col-sm-3">
+
+      <div class="box">
+        <div class="avatar">
+           <img src="https://upload.wikimedia.org/wikipedia/commons/9/98/Manhattan_Cafe_20020428.jpg" alt="Ảnh đại diện"
+           style="width:100%; height:100%; border-radius:50%; object-fit:cover;">
+           
+        </div>
+        <p class="profile-name">Trần Minh Khôi</p>
+        <p class="profile-role">Sinh viên CNTT · Khóa 25</p>
+        <div class="badges">
+          <span class="badge-dark">C cơ bản</span>
+          <span class="badge-dark">HTML</span>
+          <span class="badge-dark">Web</span>
+        </div>
+      </div>
+
+      <div class="box">
+        <p class="sec-title">Thống kê</p>
+        <div class="stats-grid">
+          <div class="stat-box"><span class="stat-val">25</span><span class="stat-lbl">Khóa</span></div>
+          <div class="stat-box"><span class="stat-val">2</span><span class="stat-lbl">Ngôn ngữ</span></div>
+          <div class="stat-box stat-full"><span class="stat-val">IT</span><span class="stat-lbl">Chuyên ngành</span></div>
+        </div>
+      </div>
+
+      <div class="box">
+        <p class="sec-title">Kỹ năng</p>
+        <div class="skill-item"><div class="dot" style="background:#7F77DD;"></div> Lập trình C</div>
+        <div class="skill-item"><div class="dot" style="background:#378ADD;"></div> HTML / CSS</div>
+        <div class="skill-item"><div class="dot" style="background:#1D9E75;"></div> Thiết kế web</div>
+      </div>
+
+    </div>
+
+    <!-- CENTER -->
+    <div class="col-sm-7">
+
+      <div class="box">
+        <p class="sec-title">Giới thiệu</p>
+        <p style="font-size:14px; line-height:1.8; margin:0; color:#e4e4e7;">
+          Sinh viên công nghệ thông tin khóa 25. Website này được tạo ra để giới thiệu về bản thân tôi.
+          Hiện đang học tập và thực hành các kỹ năng lập trình và thiết kế web.
+        </p>
+      </div>
+
+      <div class="box">
+        <p class="sec-title">Chi tiết</p>
+
+        <div class="acc-item">
+          <button class="acc-btn" onclick="toggle(this)">
+            <div class="icon-box" style="background:#1e2e28;"><i class="ti ti-bulb" style="color:#1D9E75;"></i></div>
+            <span class="acc-label">Trải nghiệm</span>
+            <i class="ti ti-chevron-down chev"></i>
+          </button>
+          <div class="panel">
+            <ul>
+              <li>Đã học qua C cơ bản</li>
+              <li>Đang thực hành thiết kế web</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="acc-item">
+          <button class="acc-btn" onclick="toggle(this)">
+            <div class="icon-box" style="background:#1a2640;"><i class="ti ti-code" style="color:#378ADD;"></i></div>
+            <span class="acc-label">Kinh nghiệm</span>
+            <i class="ti ti-chevron-down chev"></i>
+          </button>
+          <div class="panel">
+            <ul>
+              <li>C cơ bản</li>
+              <li>HTML cơ bản</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="acc-item">
+          <button class="acc-btn" onclick="toggle(this)">
+            <div class="icon-box" style="background:#2a2218;"><i class="ti ti-activity" style="color:#EF9F27;"></i></div>
+            <span class="acc-label">Hoạt động</span>
+            <i class="ti ti-chevron-down chev"></i>
+          </button>
+          <div class="panel">
+            <ul>
+              <li>Tham gia hoạt động của trường</li>
+              <li>Tự học tại nhà</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="acc-item">
+          <button class="acc-btn" onclick="toggle(this)">
+            <div class="icon-box" style="background:#232323;"><i class="ti ti-trophy" style="color:#a1a1aa;"></i></div>
+            <span class="acc-label">Khen thưởng</span>
+            <i class="ti ti-chevron-down chev"></i>
+          </button>
+          <div class="panel">
+            <p style="margin:0; font-style:italic; color:#a5b4fc;">Chưa có thành tích — đang phấn đấu.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="box">
+        <p class="sec-title">Mục tiêu</p>
+        <p style="font-size:14px; line-height:1.8; margin:0; color:#e4e4e7;">
+          Phát triển kỹ năng lập trình, nắm vững nền tảng CNTT và áp dụng vào các dự án thực tế trong tương lai.
+        </p>
+      </div>
+
+    </div>
+
+    <!-- RIGHT -->
+    <div class="col-sm-2">
+
+      <div class="box">
+        <p class="sec-title">Liên hệ</p>
+        <div class="contact-item"><i class="ti ti-mail"></i> 110125092@st.tvu.edu.vn</div>
+        <div class="contact-item"><i class="ti ti-school"></i> Khoa CNTT</div>
+        <div class="contact-item"><i class="ti ti-map-pin"></i>TVU</div>
+      </div>
+
+      <div class="box">
+        <p class="sec-title">Tiến độ</p>
+        <div class="prog-label"><span>C</span><span>70%</span></div>
+        <div class="prog-track"><div class="prog-fill" style="background:#7F77DD; width:70%;"></div></div>
+        <div class="prog-label"><span>HTML</span><span>55%</span></div>
+        <div class="prog-track"><div class="prog-fill" style="background:#378ADD; width:55%;"></div></div>
+        <div class="prog-label"><span>Web</span><span>40%</span></div>
+        <div class="prog-track" style="margin-bottom:0;"><div class="prog-fill" style="background:#1D9E75; width:40%;"></div></div>
+      </div>
+
+      <div class="box" style="text-align:center;">
+        <p class="sec-title">Năm học</p>
+        <span style="font-size:18px; font-weight:500; color:#ffffff;">2024 – 2025</span>
+        <p style="font-size:11px; color:#a1a1aa; margin:4px 0 0;">Năm nhất</p>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<footer>© 2025 Trần Minh Khôi · Sinh viên CNTT Khóa 25</footer>
+
+<script>
+  function toggle(btn) {
+    var panel = btn.nextElementSibling;
+    var chev  = btn.querySelector(".chev");
+    var isOpen = panel.classList.contains("open");
+
+    document.querySelectorAll(".panel").forEach(function(p) {
+      p.classList.remove("open");
+      p.style.maxHeight = "0";
+    });
+    document.querySelectorAll(".chev").forEach(function(c) {
+      c.style.transform = "rotate(0deg)";
+    });
+
+    if (!isOpen) {
+      panel.classList.add("open");
+      panel.style.maxHeight = panel.scrollHeight + 24 + "px";
+      chev.style.transform = "rotate(180deg)";
+    }
+  }
+
+  document.querySelector(".acc-btn").click();
+</script>
+
+</body>
+</html>
