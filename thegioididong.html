@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Thế Giới Di Động Clone</title>
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+  <!-- JQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+  <!-- Bootstrap JS -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <style>
+.location-dropdown{
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+.location-item{
+  transition: 0.2s;
+}
+
+.location-item:hover{
+  background:#ffeaa7;
+  padding-left:18px;
+}
+    body{
+      margin:0;
+      padding:0;
+      background:#f3f3f3;
+      font-family:Arial;
+    }
+
+    a{
+      text-decoration:none !important;
+    }
+
+    /* TOP */
+
+    .top-sale{
+      background:linear-gradient(to right,#ff4d00,#ff9900);
+      color:white;
+      text-align:center;
+      padding:10px;
+      font-size:30px;
+      font-weight:bold;
+    }
+
+    /* HEADER */
+
+    .header{
+      background:#ffd500;
+      padding:12px 0;
+    }
+
+    .logo{
+      font-size:35px;
+      font-weight:bold;
+    }
+
+    .search-box input{
+      width:100%;
+      height:42px;
+      border:none;
+      border-radius:25px;
+      padding-left:20px;
+      outline:none;
+    }
+
+    .header-right{
+      margin-top:5px;
+      text-align:right;
+    }
+
+    .header-btn{
+      margin-left:15px;
+      cursor:pointer;
+      font-weight:bold;
+      display:inline-block;
+    }
+
+    /* LOCATION */
+
+    .location-box{
+      position:relative;
+      display:inline-block;
+      margin-left:15px;
+    }
+
+    .location-btn{
+      background:#ffea70;
+      border:none;
+      padding:10px 15px;
+      border-radius:20px;
+      font-weight:bold;
+    }
+
+    .location-dropdown{
+      position:absolute;
+      top:110%;
+      right:0;
+      width:220px;
+      background:white;
+      border-radius:10px;
+      box-shadow:0 5px 15px rgba(0,0,0,0.2);
+      display:none;
+      z-index:999;
+    }
+
+    .location-item{
+      padding:12px;
+      cursor:pointer;
+    }
+
+    .location-item:hover{
+      background:#f3f3f3;
+    }
+
+    /* MENU */
+
+    .menu{
+      background:#ffe14a;
+    }
+
+    .main-menu{
+      list-style:none;
+      margin:0;
+      padding:0;
+      display:flex;
+    }
+
+    .main-menu li{
+      position:relative;
+    }
+
+    .main-menu li a{
+      display:block;
+      padding:15px 18px;
+      color:black;
+      font-weight:bold;
+    }
+
+    .main-menu li:hover{
+      background:#fff2a8;
+    }
+
+    /* SUB MENU */
+
+    .sub-menu{
+      position:absolute;
+      top:100%;
+      left:0;
+      background:white;
+      min-width:220px;
+      display:none;
+      z-index:999;
+      box-shadow:0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    .sub-menu a{
+      display:block;
+      padding:12px;
+    }
+
+    .sub-menu a:hover{
+      background:#f3f3f3;
+    }
+
+    /* BANNER */
+
+    .banner{
+      margin-top:20px;
+      background:linear-gradient(to right,#ff0090,#9c27b0);
+      border-radius:12px;
+      color:white;
+      text-align:center;
+      padding:60px 20px;
+    }
+
+    .banner h1{
+      font-size:48px;
+      font-weight:bold;
+    }
+
+    /* TITLE */
+
+    .section-title{
+      margin-top:30px;
+      margin-bottom:20px;
+      font-size:34px;
+      font-weight:bold;
+    }
+
+    /* COUNTDOWN */
+
+    .countdown-box{
+      text-align:center;
+      margin-bottom:20px;
+    }
+
+    .countdown{
+      background:#ff9800;
+      color:white;
+      display:inline-block;
+      padding:15px 30px;
+      border-radius:10px;
+      font-size:28px;
+      font-weight:bold;
+    }
+
+    /* PRODUCT */
+
+    .product-card{
+      background:white;
+      border-radius:12px;
+      padding:15px;
+      margin-bottom:25px;
+      transition:0.3s;
+      cursor:pointer;
+      min-height:420px;
+    }
+
+    .product-card:hover{
+      transform:translateY(-5px);
+      box-shadow:0 10px 20px rgba(0,0,0,0.2);
+    }
+
+    .product-card img{
+      width:100%;
+      height:220px;
+      object-fit:contain;
+    }
+
+    .product-name{
+      font-size:18px;
+      margin-top:10px;
+      height:50px;
+    }
+
+    .price{
+      color:red;
+      font-size:30px;
+      font-weight:bold;
+    }
+
+    .old-price{
+      text-decoration:line-through;
+      color:gray;
+    }
+
+    .discount{
+      color:red;
+      font-weight:bold;
+      margin-left:10px;
+    }
+
+    .buy-btn{
+      width:100%;
+      background:#ffd500;
+      border:none;
+      padding:12px;
+      border-radius:8px;
+      margin-top:12px;
+      font-size:18px;
+      font-weight:bold;
+    }
+
+    .buy-btn:hover{
+      background:#ffbf00;
+    }
+
+    /* CART */
+
+    .cart-count{
+      background:red;
+      color:white;
+      border-radius:50%;
+      padding:2px 7px;
+      font-size:12px;
+    }
+
+    .cart-panel{
+      position:fixed;
+      top:0;
+      right:-400px;
+      width:350px;
+      height:100%;
+      background:white;
+      z-index:9999;
+      box-shadow:-5px 0 15px rgba(0,0,0,0.2);
+      transition:0.4s;
+      padding:20px;
+      overflow:auto;
+    }
+
+    .cart-panel.active{
+      right:0;
+    }
+
+    .cart-item{
+      border-bottom:1px solid #ddd;
+      padding:10px 0;
+    }
+
+    .cart-total{
+      font-size:22px;
+      font-weight:bold;
+      color:red;
+      margin-top:20px;
+    }
+
+    /* LOGIN MODAL */
+
+    .login-box input{
+      margin-bottom:15px;
+    }
+
+    /* RESPONSIVE */
+
+    @media(max-width:768px){
+
+      .main-menu{
+        display:block;
+      }
+
+      .header-right{
+        text-align:center;
+        margin-top:15px;
+      }
+
+      .logo{
+        text-align:center;
+        margin-bottom:15px;
+      }
+
+      .banner h1{
+        font-size:30px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+  <!-- TOP -->
+  <div class="top-sale">
+    HOT SALE CUỐI TUẦN
+  </div>
+
+  <!-- HEADER -->
+  <div class="header">
+
+    <div class="container">
+
+      <div class="row">
+
+        <!-- LOGO -->
+        <div class="col-md-3">
+
+          <div class="logo">
+            thegioididong
+          </div>
+
+        </div>
+
+        <!-- SEARCH -->
+        <div class="col-md-5">
+
+          <div class="search-box">
+            <input type="text" id="searchInput"
+            placeholder="Bạn tìm gì...">
+          </div>
+
+        </div>
+
+        <!-- RIGHT -->
+        <div class="col-md-4">
+
+          <div class="header-right">
+
+            <!-- LOGIN -->
+            <span class="header-btn"
+            data-toggle="modal"
+            data-target="#loginModal">
+
+              <i class="fa fa-user"></i>
+              Đăng nhập
+
+            </span>
+
+            <!-- CART -->
+            <span class="header-btn"
+            id="openCart">
+
+              <i class="fa fa-shopping-cart"></i>
+
+              Giỏ hàng
+
+              <span class="cart-count">
+                0
+              </span>
+
+            </span>
+
+            <!-- LOCATION -->
+            <div class="location-box">
+
+              <button class="location-btn">
+
+                <i class="fa fa-location-dot"></i>
+
+                <span id="currentLocation">
+                  Hồ Chí Minh
+                </span>
+
+                <i class="fa fa-chevron-down"></i>
+
+              </button>
+
+              <div class="location-dropdown">
+
+  <input type="text" id="searchCity"
+    placeholder="Tìm tỉnh/thành..."
+    style="width:100%;padding:10px;border:none;border-bottom:1px solid #ddd;outline:none;">
+
+  <div class="location-item">Hà Nội</div>
+<div class="location-item">Hồ Chí Minh</div>
+<div class="location-item">Hải Phòng</div>
+<div class="location-item">Đà Nẵng</div>
+<div class="location-item">Cần Thơ</div>
+
+<div class="location-item">An Giang</div>
+<div class="location-item">Bà Rịa - Vũng Tàu</div>
+<div class="location-item">Bắc Giang</div>
+<div class="location-item">Bắc Kạn</div>
+<div class="location-item">Bạc Liêu</div>
+<div class="location-item">Bắc Ninh</div>
+<div class="location-item">Bến Tre</div>
+<div class="location-item">Bình Định</div>
+<div class="location-item">Bình Dương</div>
+<div class="location-item">Bình Phước</div>
+<div class="location-item">Bình Thuận</div>
+<div class="location-item">Cà Mau</div>
+<div class="location-item">Cao Bằng</div>
+<div class="location-item">Đắk Lắk</div>
+<div class="location-item">Đắk Nông</div>
+<div class="location-item">Điện Biên</div>
+<div class="location-item">Đồng Nai</div>
+<div class="location-item">Đồng Tháp</div>
+<div class="location-item">Gia Lai</div>
+<div class="location-item">Hà Giang</div>
+<div class="location-item">Hà Nam</div>
+<div class="location-item">Hà Tĩnh</div>
+<div class="location-item">Hải Dương</div>
+<div class="location-item">Hậu Giang</div>
+<div class="location-item">Hòa Bình</div>
+<div class="location-item">Hưng Yên</div>
+<div class="location-item">Khánh Hòa</div>
+<div class="location-item">Kiên Giang</div>
+<div class="location-item">Kon Tum</div>
+<div class="location-item">Lai Châu</div>
+<div class="location-item">Lâm Đồng</div>
+<div class="location-item">Lạng Sơn</div>
+<div class="location-item">Lào Cai</div>
+<div class="location-item">Long An</div>
+<div class="location-item">Nam Định</div>
+<div class="location-item">Nghệ An</div>
+<div class="location-item">Ninh Bình</div>
+<div class="location-item">Ninh Thuận</div>
+<div class="location-item">Phú Thọ</div>
+<div class="location-item">Phú Yên</div>
+<div class="location-item">Quảng Bình</div>
+<div class="location-item">Quảng Nam</div>
+<div class="location-item">Quảng Ngãi</div>
+<div class="location-item">Quảng Ninh</div>
+<div class="location-item">Quảng Trị</div>
+<div class="location-item">Sóc Trăng</div>
+<div class="location-item">Sơn La</div>
+<div class="location-item">Tây Ninh</div>
+<div class="location-item">Thái Bình</div>
+<div class="location-item">Thái Nguyên</div>
+<div class="location-item">Thanh Hóa</div>
+<div class="location-item">Thừa Thiên Huế</div>
+<div class="location-item">Tiền Giang</div>
+<div class="location-item">Trà Vinh</div>
+<div class="location-item">Tuyên Quang</div>
+<div class="location-item">Vĩnh Long</div>
+<div class="location-item">Vĩnh Phúc</div>
+<div class="location-item">Yên Bái</div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- MENU -->
+  <div class="menu">
+
+  <div class="container">
+
+    <ul class="main-menu">
+
+      <li>
+        <a href="#">
+          <i class="fa fa-mobile"></i>
+          Điện thoại
+        </a>
+        <div class="sub-menu">
+          <a href="#">iPhone</a>
+          <a href="#">Samsung</a>
+          <a href="#">Xiaomi</a>
+        </div>
+      </li>
+
+      <li>
+        <a href="#">
+          <i class="fa fa-laptop"></i>
+          Laptop
+        </a>
+        <div class="sub-menu">
+          <a href="#">Macbook</a>
+          <a href="#">Asus</a>
+          <a href="#">Dell</a>
+        </div>
+      </li>
+
+      <li>
+        <a href="#">
+          Phụ kiện
+        </a>
+        <div class="sub-menu">
+          <a href="#">Sạc, cáp</a>
+          <a href="#">Tai nghe</a>
+          <a href="#">Pin dự phòng</a>
+        </div>
+      </li>
+
+      <li>
+        <a href="#">
+          Smartwatch
+        </a>
+        <div class="sub-menu">
+          <a href="#">Apple Watch</a>
+          <a href="#">Samsung Watch</a>
+          <a href="#">Xiaomi Watch</a>
+        </div>
+      </li>
+
+      <li>
+        <a href="#">
+          Đồng hồ
+        </a>
+        <div class="sub-menu">
+          <a href="#">Đồng hồ nam</a>
+          <a href="#">Đồng hồ nữ</a>
+          <a href="#">Đồng hồ thời trang</a>
+        </div>
+      </li>
+
+      <li>
+        <a href="#">
+          Tablet
+        </a>
+        <div class="sub-menu">
+          <a href="#">iPad</a>
+          <a href="#">Samsung Tab</a>
+          <a href="#">Lenovo Tab</a>
+        </div>
+      </li>
+
+      <li>
+        <a href="#">
+          Máy cũ - Thu cũ
+        </a>
+        <div class="sub-menu">
+          <a href="#">Thu cũ đổi mới</a>
+          <a href="#">Điện thoại cũ</a>
+          <a href="#">Laptop cũ</a>
+        </div>
+      </li>
+
+      <li>
+        <a href="#">
+          Màn hình - Máy in
+        </a>
+        <div class="sub-menu">
+          <a href="#">Màn hình máy tính</a>
+          <a href="#">Máy in</a>
+          <a href="#">Mực in</a>
+        </div>
+      </li>
+
+      <li>
+        <a href="#">
+          SIM - Thẻ cào
+        </a>
+        <div class="sub-menu">
+          <a href="#">SIM 4G/5G</a>
+          <a href="#">Thẻ cào điện thoại</a>
+          <a href="#">Gói data</a>
+        </div>
+      </li>
+
+      <li>
+        <a href="#">
+          Dịch vụ tiện ích
+        </a>
+        <div class="sub-menu">
+          <a href="#">Bảo hành mở rộng</a>
+          <a href="#">Trả góp</a>
+          <a href="#">Giao hàng</a>
+        </div>
+      </li>
+
+    </ul>
+
+  </div>
+
+</div>
+
+  <!-- MAIN -->
+  <div class="container">
+
+    <!-- BANNER -->
+    <div class="banner">
+
+      <h1>Cơ Hội Tốt</h1>
+
+      <h3>
+        Để sở hữu một chiếc Apple
+      </h3>
+
+    </div>
+
+    <!-- TITLE -->
+    <div class="section-title">
+      Khuyến mãi Online
+    </div>
+
+    <!-- COUNTDOWN -->
+    <div class="countdown-box">
+
+      <div class="countdown">
+        01 : 00 : 00
+      </div>
+
+    </div>
+
+    <!-- PRODUCTS -->
+    <div class="row">
+
+      <!-- PRODUCT -->
+      <div class="col-md-3 col-sm-6 product-item">
+
+        <div class="product-card">
+
+          <img src="">
+
+          <div class="product-name">
+            iPhone 15 256GB
+          </div>
+
+          <div class="price">
+            17.490.000đ
+          </div>
+
+          <button class="buy-btn add-cart">
+            Thêm vào giỏ
+          </button>
+
+        </div>
+
+      </div>
+
+      <!-- PRODUCT -->
+      <div class="col-md-3 col-sm-6 product-item">
+
+        <div class="product-card">
+
+          <img src="https://cdn.tgdd.vn/Products/Images/42/329143/samsung-galaxy-a36-thumb-600x600.jpg">
+
+          <div class="product-name">
+            Samsung Galaxy A36
+          </div>
+
+          <div class="price">
+            8.090.000đ
+          </div>
+
+          <button class="buy-btn add-cart">
+            Thêm vào giỏ
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- CART PANEL -->
+  <div class="cart-panel">
+
+    <h2>
+      Giỏ hàng
+    </h2>
+
+    <div id="cartItems"></div>
+
+    <div class="cart-total">
+      Tổng:
+      <span id="cartTotal">
+        0đ
+      </span>
+    </div>
+
+    <br>
+
+    <button class="btn btn-danger"
+    id="closeCart">
+
+      Đóng
+
+    </button>
+
+    <button class="btn btn-success btn-block"
+id="checkoutBtn">
+
+  Thanh toán
+
+</button>
+  </div>
+
+  <!-- LOGIN MODAL -->
+  <div id="loginModal"
+  class="modal fade">
+
+    <div class="modal-dialog">
+
+      <div class="modal-content">
+
+        <div class="modal-header">
+
+          <button type="button"
+          class="close"
+          data-dismiss="modal">
+
+            &times;
+
+          </button>
+
+          <h4>
+            Đăng nhập
+          </h4>
+
+        </div>
+
+        <div class="modal-body">
+
+          <div class="login-box">
+
+            <input type="text"
+            class="form-control"
+            id="username"
+            placeholder="Tên đăng nhập">
+
+            <input type="password"
+            class="form-control"
+            id="password"
+            placeholder="Mật khẩu">
+
+            <button class="btn btn-warning btn-block"
+            id="loginBtn">
+
+              Đăng nhập
+
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- SCRIPT -->
+  <script>
+
+    let cartCount = 0;
+    let total = 0;
+
+    $(document).ready(function(){
+      
+      // MENU
+      // CHECKOUT
+$("#checkoutBtn").click(function(){
+
+  if(cartCount === 0){
+    alert("Giỏ hàng đang trống!");
+    return;
+  }
+
+  let confirmPay = confirm(
+    "Bạn có muốn thanh toán tổng số tiền: " +
+    $("#cartTotal").text() + " ?"
+  );
+
+  if(confirmPay){
+
+    alert("Thanh toán thành công!");
+
+    // RESET GIỎ HÀNG
+    cartCount = 0;
+    total = 0;
+
+    $(".cart-count").text(0);
+    $("#cartTotal").text("0đ");
+    $("#cartItems").empty();
+
+    // đóng giỏ hàng
+    $(".cart-panel").removeClass("active");
+  }
+
+});
+
+      $(".main-menu li").hover(
+
+        function(){
+
+          $(this).find(".sub-menu")
+          .stop()
+          .slideDown(200);
+
+        },
+
+        function(){
+
+          $(this).find(".sub-menu")
+          .stop()
+          .slideUp(200);
+
+        }
+
+      );
+
+      // LOCATION 
+$(".location-btn").click(function(e){
+  e.stopPropagation();
+  $(".location-dropdown").fadeToggle(200);
+});
+
+// Click trong dropdown (bao gồm input + items) không đóng
+$(".location-dropdown").click(function(e){
+  e.stopPropagation();
+});
+
+// Chọn tỉnh
+$(".location-item").click(function(){
+  let city = $(this).text();
+  $("#currentLocation").text(city);
+  $(".location-dropdown").fadeOut(200);
+});
+
+// Chỉ đóng dropdown khi click ra ngoài cả location-box
+$(document).click(function(e){
+  if (!$(e.target).closest(".location-box").length) {
+    $(".location-dropdown").fadeOut(200);
+  }
+});
+
+      // SEARCH
+
+      $("#searchInput").keyup(function(){
+
+        let value = $(this)
+        .val()
+        .toLowerCase();
+
+        $(".product-item").filter(function(){
+
+          $(this).toggle(
+
+            $(this)
+            .text()
+            .toLowerCase()
+            .indexOf(value) > -1
+
+          );
+
+        });
+
+      });
+
+      // LOGIN
+
+      $("#loginBtn").click(function(){
+
+        let user = $("#username").val();
+
+        let pass = $("#password").val();
+
+        if(user == "" || pass == ""){
+
+          alert("Vui lòng nhập đầy đủ");
+
+        }else{
+
+          alert("Đăng nhập thành công");
+
+          $("#loginModal").modal("hide");
+
+        }
+
+      });
+      $("#searchCity").on("keyup", function () {
+
+  let value = $(this).val().toLowerCase();
+
+  $(".location-item").filter(function () {
+
+    $(this).toggle(
+      $(this).text().toLowerCase().indexOf(value) > -1
+    );
+
+  });
+
+});
+      // OPEN CART
+
+      $("#openCart").click(function(){
+
+        $(".cart-panel")
+        .addClass("active");
+
+      });
+
+      // CLOSE CART
+
+      $("#closeCart").click(function(){
+
+        $(".cart-panel")
+        .removeClass("active");
+
+      });
+
+      // ADD CART
+
+      $(".add-cart").click(function(e){
+
+        e.stopPropagation();
+
+        let card = $(this)
+        .closest(".product-card");
+
+        let name = card
+        .find(".product-name")
+        .text();
+
+        let priceText = card
+        .find(".price")
+        .text();
+
+        let price = parseInt(
+          priceText.replace(/\D/g,'')
+        );
+
+        cartCount++;
+
+        total += price;
+
+        $(".cart-count")
+        .text(cartCount);
+
+        $("#cartItems").append(
+
+          `
+          <div class="cart-item">
+
+            <b>${name}</b>
+
+            <br>
+
+            ${priceText}
+
+          </div>
+          `
+
+        );
+
+        $("#cartTotal")
+        .text(total.toLocaleString() + "đ");
+
+      });
+
+    });
+
+    // COUNTDOWN
+
+    let time = 3600;
+
+    setInterval(function(){
+
+      let hours = Math.floor(time / 3600);
+
+      let minutes = Math.floor(
+        (time % 3600) / 60
+      );
+
+      let seconds = time % 60;
+
+      hours = String(hours)
+      .padStart(2,'0');
+
+      minutes = String(minutes)
+      .padStart(2,'0');
+
+      seconds = String(seconds)
+      .padStart(2,'0');
+
+      $(".countdown").html(
+
+        hours + " : " +
+        minutes + " : " +
+        seconds
+
+      );
+
+      if(time > 0){
+        time--;
+      }
+
+    },1000);
+
+  </script>
+<!-- FOOTER -->
+<footer style="background:#fff; padding:25px 0; margin-top:40px; font-size:14px; color:#333; border-top:1px solid #ddd;">
+  <div class="container">
+
+    <p>
+      © 2018. Công Ty Cổ Phần Đầu Tư Điện Máy Xanh. GPDKKD: 0303217354 do sở KH & ĐT TP.HCM cấp ngày 02/01/2007.
+      GPMXH: 21/GP-BTTTT do Bộ Thông Tin và Truyền Thông cấp ngày 11/01/2021.
+    </p>
+
+    <p>
+      Địa chỉ: 128 Trần Quang Khải, P.Tân Định, TP. Hồ Chí Minh.  
+      Địa chỉ liên hệ và gửi chứng từ: Lô T2-1.2, Đường D1, P.Tăng Nhơn Phú, TP.Hồ Chí Minh.
+    </p>
+
+    <p>
+      Điện thoại: 028 38125960. Email: hotrotmdt@thegioididong.com.  
+      Chịu trách nhiệm nội dung: Huỳnh Văn Tốt.  
+      Đại diện ủy quyền giải quyết các vấn đề liên quan bảo vệ quyền lợi người tiêu dùng: Huỳnh Văn Tốt.
+    </p>
+
+    <p>
+      <a href="https://www.thegioididong.com" target="_blank">
+        Truy cập website chính thức
+      </a>
+    </p>
+
+  </div>
+</footer>
+</body>
+</html>
