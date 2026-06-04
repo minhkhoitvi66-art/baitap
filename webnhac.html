@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Music Player VN Pro</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: #0f0f0f;
+  color: white;
+  display: flex;
+  height: 100vh;
+}
+
+/* SIDEBAR */
+.sidebar {
+  width: 220px;
+  background: #181818;
+  padding: 20px;
+}
+
+.sidebar h2 {
+  color: #1db954;
+  margin-bottom: 20px;
+}
+
+/* MAIN */
+.main {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.title {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+/* SONG */
+.song {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background: #1e1e1e;
+  padding: 12px;
+  margin-bottom: 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.song:hover {
+  background: #2a2a2a;
+  transform: scale(1.02);
+}
+
+.song img {
+  width: 60px;
+  height: 60px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.song .info h3 {
+  font-size: 16px;
+}
+
+.song .info span {
+  font-size: 12px;
+  color: #aaa;
+}
+
+/* PLAYER */
+.player {
+  position: fixed;
+  bottom: 0;
+  left: 220px;
+  right: 0;
+  background: #181818;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  border-top: 1px solid #333;
+}
+
+.player img {
+  width: 50px;
+  height: 50px;
+  border-radius: 10px;
+  object-fit: cover;
+  display: none;
+}
+
+.player button {
+  background: #1db954;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 20px;
+  cursor: pointer;
+  color: white;
+}
+
+.player button:hover {
+  background: #17a74a;
+}
+</style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+  <h2>🎵 Nhạc Việt</h2>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+  <div class="title">Top nhạc Việt</div>
+
+  <div class="song" onclick="playSong('song1')">
+    <img src="https://yt3.googleusercontent.com/ru3SakOhxGBHZnrVeKPwmMndF81j1-gIrsPtmGSHV1YbX3Y6JoFVMR93UdlfpKp9_xIeh62t=s900-c-k-c0x00ffffff-no-rj">
+    <div class="info">
+      <h3>Sơn Tùng M-TP - Hãy Trao Cho Anh</h3>
+      <span>V-Pop</span>
+    </div>
+  </div>
+
+  <div class="song" onclick="playSong('song2')">
+    <img src="https://media-cdn-v2.laodong.vn/storage/newsportal/2025/10/30/1600735/Jack.jpeg">
+    <div class="info">
+      <h3>Jack - Sóng Gió</h3>
+      <span>V-Pop</span>
+    </div>
+  </div>
+
+  <div class="song" onclick="playSong('song3')">
+    <img src="https://images2.thanhnien.vn/528068263637045248/2025/12/7/50582693112551185826382638087635284423570769n-17651113303211456139374.jpg">
+    <div class="info">
+      <h3>Đen Vâu - Bài Này Chill Phết</h3>
+      <span>Rap Việt</span>
+    </div>
+  </div>
+</div>
+
+<!-- PLAYER -->
+<div class="player">
+  <img id="nowImg">
+  <div id="nowPlaying">🎧 Chưa phát bài nào</div>
+  <button onclick="togglePlay()">▶ / ⏸</button>
+  <audio id="audio"></audio>
+</div>
+
+<!-- SCRIPT -->
+<script>
+const songs = {
+  song1: {
+    name: "Sơn Tùng M-TP - Hãy Trao Cho Anh",
+    img: "https://yt3.googleusercontent.com/ru3SakOhxGBHZnrVeKPwmMndF81j1-gIrsPtmGSHV1YbX3Y6JoFVMR93UdlfpKp9_xIeh62t=s900-c-k-c0x00ffffff-no-rj",
+    url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+  },
+  song2: {
+    name: "Jack - Sóng Gió",
+    img: "https://media-cdn-v2.laodong.vn/storage/newsportal/2025/10/30/1600735/Jack.jpeg",
+    url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
+  },
+  song3: {
+    name: "Đen Vâu - Bài Này Chill Phết",
+    img: "https://i.imhttps://images2.thanhnien.vn/528068263637045248/2025/12/7/50582693112551185826382638087635284423570769n-17651113303211456139374.jpggur.com/9X5fX0A.jpg",
+    url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3"
+  }
+};
+
+let audio = document.getElementById("audio");
+
+function playSong(id) {
+  audio.src = songs[id].url;
+  audio.play();
+
+  document.getElementById("nowPlaying").innerText =
+    "🎧 " + songs[id].name;
+
+  const img = document.getElementById("nowImg");
+  img.src = songs[id].img;
+  img.style.display = "block";
+}
+
+function togglePlay() {
+  if (audio.paused) {
+    audio.play();
+  } else {
+    audio.pause();
+  }
+}
+</script>
+
+</body>
+</html>
