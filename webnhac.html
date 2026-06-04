@@ -62,6 +62,10 @@ body {
   transform: scale(1.02);
 }
 
+.song.active {
+  border: 1px solid #1db954;
+}
+
 .song img {
   width: 60px;
   height: 60px;
@@ -126,7 +130,7 @@ body {
 <div class="main">
   <div class="title">Top nhạc Việt</div>
 
-  <div class="song" onclick="playSong('song1')">
+  <div class="song" onclick="playSong(event, 'song1')">
     <img src="https://yt3.googleusercontent.com/ru3SakOhxGBHZnrVeKPwmMndF81j1-gIrsPtmGSHV1YbX3Y6JoFVMR93UdlfpKp9_xIeh62t=s900-c-k-c0x00ffffff-no-rj">
     <div class="info">
       <h3>Sơn Tùng M-TP - Hãy Trao Cho Anh</h3>
@@ -134,7 +138,7 @@ body {
     </div>
   </div>
 
-  <div class="song" onclick="playSong('song2')">
+  <div class="song" onclick="playSong(event, 'song2')">
     <img src="https://media-cdn-v2.laodong.vn/storage/newsportal/2025/10/30/1600735/Jack.jpeg">
     <div class="info">
       <h3>Jack - Sóng Gió</h3>
@@ -142,7 +146,7 @@ body {
     </div>
   </div>
 
-  <div class="song" onclick="playSong('song3')">
+  <div class="song" onclick="playSong(event, 'song3')">
     <img src="https://images2.thanhnien.vn/528068263637045248/2025/12/7/50582693112551185826382638087635284423570769n-17651113303211456139374.jpg">
     <div class="info">
       <h3>Đen Vâu - Bài Này Chill Phết</h3>
@@ -155,11 +159,10 @@ body {
 <div class="player">
   <img id="nowImg">
   <div id="nowPlaying">🎧 Chưa phát bài nào</div>
-  <button onclick="togglePlay()">▶ / ⏸</button>
+  <button onclick="togglePlay()">▶</button>
   <audio id="audio"></audio>
 </div>
 
-<!-- SCRIPT -->
 <script>
 const songs = {
   song1: {
@@ -174,16 +177,23 @@ const songs = {
   },
   song3: {
     name: "Đen Vâu - Bài Này Chill Phết",
-    img: "https://i.imhttps://images2.thanhnien.vn/528068263637045248/2025/12/7/50582693112551185826382638087635284423570769n-17651113303211456139374.jpggur.com/9X5fX0A.jpg",
+    img: "https://images2.thanhnien.vn/528068263637045248/2025/12/7/50582693112551185826382638087635284423570769n-17651113303211456139374.jpg",
     url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3"
   }
 };
 
 let audio = document.getElementById("audio");
+let currentSongId = null;
 
-function playSong(id) {
+function playSong(event, id) {
+  currentSongId = id;
+
   audio.src = songs[id].url;
-  audio.play();
+  audio.currentTime = 0;
+
+  audio.play().catch(err => {
+    console.log("Autoplay blocked:", err);
+  });
 
   document.getElementById("nowPlaying").innerText =
     "🎧 " + songs[id].name;
@@ -191,13 +201,24 @@ function playSong(id) {
   const img = document.getElementById("nowImg");
   img.src = songs[id].img;
   img.style.display = "block";
+
+  document.querySelector(".player button").innerText = "⏸";
+
+  document.querySelectorAll(".song").forEach(s => s.classList.remove("active"));
+  event.currentTarget.classList.add("active");
 }
 
 function togglePlay() {
+  const btn = document.querySelector(".player button");
+
+  if (!audio.src) return;
+
   if (audio.paused) {
     audio.play();
+    btn.innerText = "⏸";
   } else {
     audio.pause();
+    btn.innerText = "▶";
   }
 }
 </script>
